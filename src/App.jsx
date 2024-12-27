@@ -26,7 +26,7 @@ const appStyle = {
     height: "100vh",
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridTemplateRows: "3rem 2rem 1fr 1rem",
+    gridTemplateRows: "7rem 2rem 1fr 1rem",
 };
 
 function App() {
