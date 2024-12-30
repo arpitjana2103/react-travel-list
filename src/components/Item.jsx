@@ -20,7 +20,7 @@ function Item(prop) {
                 checked={packed}
                 onChange={handleOnChange}
             />
-            <label htmlFor={name}>
+            <label className={packed ? styles.packed : ""} htmlFor={name}>
                 <span>
                     {count} {name}
                 </span>

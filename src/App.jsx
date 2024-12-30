@@ -46,8 +46,41 @@ const appStyle = {
 
 // [{ count: 2, packed: false, name: "shirts" }, { count: 1, packed: true, name: "cable" }, { count: 2, packed: false, name: "powerBank" }]
 
+function sortItemsArr(itemsArr, sort) {
+    if (sort === "input-order") {
+        return itemsArr;
+    }
+
+    if (sort === "description") {
+        itemsArr.sort(function (item1, item2) {
+            return item1.name.localeCompare(item2.name);
+        });
+        return itemsArr;
+    }
+
+    if (sort === "status") {
+        itemsArr.sort(function (item1, item2) {
+            if (item1.packed === item2.packed) return 0;
+            if (item1.packed === true && item2.packed === false) return 1;
+            if (item1.packed === false && item2.packed === true) return -1;
+        });
+        return itemsArr;
+    }
+}
+
 function App() {
     const [items, setItems] = useState({});
+    const [sort, setSort] = useState("input-order");
+
+    // Derived State
+    const itemsArr = sortItemsArr(Object.values(items), sort);
+
+    const totalItems = itemsArr.length;
+    const packedItems = itemsArr.reduce(function (acc, item) {
+        if (item.packed) acc++;
+        return acc;
+    }, 0);
+    const packedPersentage = ((packedItems / totalItems) * 100).toFixed(2);
 
     function addItem(item) {
         setItems(function (items) {
@@ -73,6 +106,14 @@ function App() {
         });
     }
 
+    function filterItems(sortValue) {
+        setSort(sortValue);
+    }
+
+    function clearList() {
+        setItems({});
+    }
+
     return (
         <div style={appStyle}>
             <Header />
@@ -80,10 +121,14 @@ function App() {
             <ItemList
                 deleteItem={deleteItem}
                 updateItem={updateItem}
-                items={Object.values(items)}
+                items={itemsArr}
             />
-            <Filter />
-            <Footer />
+            <Filter clearList={clearList} filterItems={filterItems} />
+            <Footer
+                totalItems={totalItems}
+                packedItems={packedItems}
+                packedPersentage={packedPersentage}
+            />
         </div>
     );
 }
