@@ -13,12 +13,15 @@
 #FFC145 ==> ItemList
 #FB4141 ==> Footer
 
- */
+*/
+
+import { useState } from "react";
 
 import AddItem from "./components/AddItem";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import ItemList from "./components/ItemList";
+import Filter from "./components/Filter";
 
 import "./index.css";
 
@@ -26,15 +29,17 @@ const appStyle = {
     height: "100vh",
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridTemplateRows: "7rem 5rem 1fr 1rem",
+    gridTemplateRows: "7rem 5rem 1fr 4rem auto",
 };
 
 function App() {
+    const [items, setItems] = useState([]);
     return (
         <div style={appStyle}>
             <Header />
-            <AddItem />
-            <ItemList />
+            <AddItem setItems={setItems} />
+            <ItemList items={items} />
+            <Filter />
             <Footer />
         </div>
     );

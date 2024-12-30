@@ -1,7 +1,11 @@
 import styles from "../styles/Footer.module.css";
 
 function Footer() {
-    return <div className={styles.footer}>Footer</div>;
+    return (
+        <div className={styles.footer}>
+            You have 3 items on your list, and you already packed x (xx.xx%)
+        </div>
+    );
 }
 
 export default Footer;
