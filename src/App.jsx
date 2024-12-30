@@ -32,13 +32,27 @@ const appStyle = {
     gridTemplateRows: "7rem 5rem 1fr 4rem auto",
 };
 
+// const items = [
+//     { name: "shirts", count: 2, packed: false },
+//     { name: "shirts", count: 2, packed: false },
+//     { name: "charger", count: 2, packed: false },
+// ];
+
+// const items = {
+//     shirts: { count: 2, packed: false, name: "shirts" },
+//     cable: { count: 1, packed: true, name: "cable" },
+//     powerBank: { count: 2, packed: false, name: "powerBank" },
+// };
+
+// [{ count: 2, packed: false, name: "shirts" }, { count: 1, packed: true, name: "cable" }, { count: 2, packed: false, name: "powerBank" }]
+
 function App() {
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState({});
     return (
         <div style={appStyle}>
             <Header />
             <AddItem setItems={setItems} />
-            <ItemList items={items} />
+            <ItemList items={Object.values(items)} />
             <Filter />
             <Footer />
         </div>

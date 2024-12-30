@@ -18,7 +18,14 @@ function AddItem(props) {
     function handleSubmit(e) {
         e.preventDefault();
         if (item.name === "") return;
-        setItems((items) => [...items, item]);
+
+        // Add Item to items
+        setItems(function (items) {
+            items[item.name] = item;
+            return { ...items };
+        });
+
+        // Reset Item
         setItem({ packed: false, count: 1, name: "" });
     }
 
