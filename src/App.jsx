@@ -48,11 +48,35 @@ const appStyle = {
 
 function App() {
     const [items, setItems] = useState({});
+
+    function updateItem(nameKey, packed) {
+        setItems(function (items) {
+            // Update
+            items[nameKey].packed = packed;
+            return { ...items };
+        });
+    }
+
+    function deleteItem(nameKey) {
+        setItems(function (items) {
+            // Delete
+            delete items[nameKey];
+            return { ...items };
+        });
+    }
+
+    // PROP-DRILLING
+    // APP -> ItemList -> Item
+
     return (
         <div style={appStyle}>
             <Header />
             <AddItem setItems={setItems} />
-            <ItemList items={Object.values(items)} />
+            <ItemList
+                deleteItem={deleteItem}
+                updateItem={updateItem}
+                items={Object.values(items)}
+            />
             <Filter />
             <Footer />
         </div>
