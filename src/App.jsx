@@ -49,6 +49,14 @@ const appStyle = {
 function App() {
     const [items, setItems] = useState({});
 
+    function addItem(item) {
+        setItems(function (items) {
+            // Create
+            items[item.name] = item;
+            return { ...items };
+        });
+    }
+
     function updateItem(nameKey, packed) {
         setItems(function (items) {
             // Update
@@ -65,13 +73,10 @@ function App() {
         });
     }
 
-    // PROP-DRILLING
-    // APP -> ItemList -> Item
-
     return (
         <div style={appStyle}>
             <Header />
-            <AddItem setItems={setItems} />
+            <AddItem addItem={addItem} />
             <ItemList
                 deleteItem={deleteItem}
                 updateItem={updateItem}

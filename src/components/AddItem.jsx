@@ -3,7 +3,7 @@ import styles from "../styles/AddItem.module.css";
 import Emoji from "./Emoji";
 
 function AddItem(props) {
-    const { setItems } = props;
+    const { addItem } = props;
 
     const [item, setItem] = useState({ packed: false, count: 1, name: "" });
 
@@ -20,10 +20,7 @@ function AddItem(props) {
         if (item.name === "") return;
 
         // Add Item to items
-        setItems(function (items) {
-            items[item.name] = item;
-            return { ...items };
-        });
+        addItem(item);
 
         // Reset Item
         setItem({ packed: false, count: 1, name: "" });
